@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student Campus Guide for KL University — explore campus locations, buildings and facilities.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0F2A47">
+  <title>Student Campus Guide | KL University</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<div class="wayfinding-strip">&nbsp;</div>
+<header>
+  <div class="nav-row">
+    <div class="brand">
+      <div class="brand-mark">SC</div>
+      <div class="brand-text">
+        <div class="name">Student Campus Guide</div>
+        <div class="tag">KL University · Explore. Navigate. Discover.</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#map">Campus Map</a> 
+      <a href="#search">Buildings</a> 
+      <a href="#tour">Campus Tour</a> 
+      <a href="#who">Who It's For</a> 
+      <a href="#benefits">Benefits</a> 
+      <a href="#tech">Tech</a>
+    </nav>
+    <button class="nav-cta" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'})">Find a place</button>
+  </div>
+</header><!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <span class="zone-tag">● Zone Board — Fresher Orientation Project</span>
+    <h1>Where do you want to go?</h1>
+    <p class="lede">One search bar for the whole campus. Search a building, lab, hostel or facility and get directions from your current location.</p>
+    <div class="search-board">
+      <input id="heroSearch" autocomplete="off" type="text" placeholder="Search for buildings, labs, hostels..."> 
+      <button>Search</button>
+      <div id="suggest">&nbsp;</div>
+    </div>
+    <div class="zones">
+      <a class="zone-card" href="#map">
+        <span class="zid">Z·01</span> 
+        <span class="zname">Campus Map</span>
+      </a> 
+      <a class="zone-card" href="#search" onclick="filterByCat('Academic')">
+        <span class="zid">Z·02</span> 
+        <span class="zname">Buildings</span>
+      </a> 
+      <a class="zone-card" href="#search" onclick="filterByCat('Labs')">
+        <span class="zid">Z·03</span> 
+        <span class="zname">Labs</span>
+      </a> 
+      <a class="zone-card" href="#search" onclick="filterByCat('Library')">
+        <span class="zid">Z·04</span> 
+        <span class="zname">Library</span>
+      </a> 
+      <a class="zone-card" href="#search" onclick="filterByCat('Canteen')">
+        <span class="zid">Z·05</span> 
+        <span class="zname">Canteens</span>
+      </a> 
+      <a class="zone-card" href="#search" onclick="filterByCat('Hostel')">
+        <span class="zid">Z·06</span> 
+        <span class="zname">Hostels</span>
+      </a> 
+      <a class="zone-card" href="#tour">
+        <span class="zid">Z·07</span> 
+        <span class="zname">Campus Tour</span>
+      </a>
+    </div>
+  </div>
+</section>
+<!-- ================= GOOGLE MAP ================= -->
+<section id="map">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Google Maps Navigation</span>
+      <h2>Find your way around KL University</h2>
+      <p>Select any building from the directory below and get directions from your current location using Google Maps.</p>
+    </div>
+    <div class="map-layout"><!-- GOOGLE MAP -->
+      <div class="google-map-container">
+        <div class="google-map-heading">
+          <span class="eyebrow">Live Campus Location</span>
+          <h3>KL University — Vaddeswaram</h3>
+          <p>Use the buttons below to navigate from your current location to any campus building.</p>
+        </div>
+        <div class="google-map-frame">
+          <iframe style="border: 0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2479.097536182581!2d80.62128745667401!3d16.441909913136726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35f0a2a073957d%3A0xe79d66babc83e470!2sK%20L%20UNIVERSITY%2C%20Vaddeswaram%2C%20Andhra%20Pradesh%20522501!5e0!3m2!1sen!2sin!4v1787555698179!5m2!1sen!2sin" width="600" height="450" allowfullscreen="allowfullscreen"></iframe>
+        </div>
+      </div>
+<!-- SELECTED BUILDING -->
+      <div id="infoPanel" class="info-panel">
+        <div class="placeholder">
+          <strong style="color: var(--ink); font-family: 'Archivo'; font-size: 1.1rem; display: block; margin-bottom: 8px;">Select a building</strong> Choose a building from the directory below. Then click 
+          <strong>Get Directions</strong> to open a route from your current location in Google Maps.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================= BUILDING DIRECTORY ================= -->
+<section id="search" class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Campus Directory</span>
+      <h2>All buildings, labs and facilities</h2>
+      <p>Choose a location and the website will take you to the Google Map and provide directions from your current location.</p>
+    </div>
+    <div class="filter-row">
+      <input id="searchInput" type="text" placeholder="Search a building..."> 
+      <button class="chip active" data-cat="All">All</button> 
+      <button class="chip" data-cat="Academic">Academic</button> 
+      <button class="chip" data-cat="Library">Library</button> 
+      <button class="chip" data-cat="Labs">Labs</button> 
+      <button class="chip" data-cat="Canteen">Canteen</button> 
+      <button class="chip" data-cat="Hostel">Hostel</button> 
+      <button class="chip" data-cat="Sports">Sports</button>
+    </div>
+    <div id="resultsGrid" class="results-grid">&nbsp;</div>
+    <p id="noResults" class="no-results" style="display: none;">No building found.</p>
+  </div>
+</section>
+<!-- ================= TOUR ================= -->
+<section id="tour">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Digital Campus Tour</span>
+      <h2>Show me around the campus</h2>
+      <p>Choose a stop and then use the direction button to navigate there.</p>
+    </div>
+    <div class="tour-wrap">
+      <div id="tourRail" class="tour-rail">&nbsp;</div>
+      <div class="tour-stage">
+        <div>
+          <div id="tourStepLabel" class="eyebrow" style="color: var(--amber);">Stop 1</div>
+          <h3 id="tourTitle">&nbsp;</h3>
+          <p id="tourDesc">&nbsp;</p>
+        </div>
+        <div class="tour-controls">
+          <button id="tourPrev">← Previous</button> 
+          <button id="tourNext">Next stop →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================= WHO ================= -->
+<section id="who" class="alt-bg">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Not Only Freshers</span>
+      <h2>Who can use it</h2>
+    </div>
+    <div class="grid-4">
+      <div class="person-card">
+        <div class="icon">🎓</div>
+        <h4>Students</h4>
+        <p>Find classrooms, labs and facilities without asking around.</p>
+      </div>
+      <div class="person-card">
+        <div class="icon">👪</div>
+        <h4>Parents</h4>
+        <p>Understand the campus layout during visits and orientation.</p>
+      </div>
+      <div class="person-card">
+        <div class="icon">💼</div>
+        <h4>New Faculty</h4>
+        <p>Locate departments and offices easily.</p>
+      </div>
+      <div class="person-card">
+        <div class="icon">📍</div>
+        <h4>Visitors</h4>
+        <p>Find important campus locations without getting lost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================= BENEFITS ================= -->
+<section id="benefits">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What Problem Does It Solve?</span>
+      <h2>Benefits</h2>
+    </div>
+    <div class="benefit-list">
+      <div class="benefit-item">
+        <span class="num">01</span>
+        <p>Saves students time when finding new buildings.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="num">02</span>
+        <p>Reduces confusion around unfamiliar campus locations.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="num">03</span>
+        <p>Helps students explore the campus independently.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="num">04</span>
+        <p>Keeps campus information in one place.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="num">05</span>
+        <p>Makes a large campus easier to understand.</p>
+      </div>
+      <div class="benefit-item">
+        <span class="num">06</span>
+        <p>Reduces the need to constantly ask seniors for directions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================= TECH ================= -->
+<section id="tech" class="alt-bg">
+  <div class="wrap two-col">
+    <div>
+      <span class="eyebrow">Future Improvements</span>
+      <h2>What can we add later</h2>
+      <div class="tag-cloud">
+        <span>Real-time location</span><span>Turn-by-turn navigation</span>
+        <span>Indoor navigation</span><span>Timetable integration</span>
+        <span>AI chatbot</span><span>Transport info</span>
+        <span>Accessible routes</span><span>Emergency locations</span>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow">Technology</span>
+      <h2>How can we build it</h2>
+      <table class="stack-table">
+        <tbody>
+          <tr>
+            <td class="k">Frontend</td>
+            <td class="v">HTML, CSS, JavaScript</td>
+          </tr>
+          <tr>
+            <td class="k">Backend</td>
+            <td class="v">Python or Node.js</td>
+          </tr>
+          <tr>
+            <td class="k">Database</td>
+            <td class="v">Firebase or MySQL</td>
+          </tr>
+          <tr>
+            <td class="k">Maps</td>
+            <td class="v">Google Maps</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-quote">"Getting lost should not be part of the college experience."</div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h5>Guide</h5>
+          <a href="#map">Google Map</a> 
+          <a href="#search">Buildings</a> 
+          <a href="#tour">Campus Tour</a>
+        </div>
+        <div class="foot-col">
+          <h5>Project</h5>
+          <a href="#who">Who It's For</a> 
+          <a href="#benefits">Benefits</a> 
+          <a href="#tech">Tech Stack</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 Student Campus GuideB.Tech CSE · KL University</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
